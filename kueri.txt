@@ -1,0 +1,31 @@
+create database tiketKereta;
+
+use tiketKereta;
+
+create table kereta (
+id int primary key auto_increment,
+kelas_kereta varchar(25),
+harga int,
+kapasitas_kursi int
+);
+
+create table pemesanan (
+id_pemesanan int primary key auto_increment unique,
+idkelaskereta int,
+jumlah_pesan int,
+total_harga int,
+foreign key (idkelaskereta) references kereta (id)
+);
+
+insert into kereta values (1,'eksekutif',60000,45);
+
+insert into kereta values (2,'ekonomi',10000,45);
+
+insert into pemesanan values (1,1,2,60000);
+
+insert into pemesanan values (2,2,2,10000);
+
+select pemesanan.id_pemesanan, kereta.kelas_kereta, pemesanan.jumlah_pesan, pemesanan.total_harga
+from pemesanan
+inner join kereta on pemesanan.idkelaskereta = kereta.id
+;
